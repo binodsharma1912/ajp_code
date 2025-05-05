@@ -1,0 +1,28 @@
+package com.inet;
+import java.net.*;
+public class Main {
+    public static void main(String[] args) throws Exception {
+        // 1. Local host
+        InetAddress local = InetAddress.getLocalHost();
+        System.out.println("1. Local Host: " + local);
+
+        // 2. By name
+        InetAddress google = InetAddress.getByName("www.google.com");
+        System.out.println("2. Google IP: " + google);
+
+        // 3. By address with hostname
+        byte[] ip = { (byte) 142, (byte) 250, (byte) 195, (byte) 68 };
+        InetAddress namedIP = InetAddress.getByAddress("google", ip);
+        System.out.println("3. Host with IP: " + namedIP);
+
+        // 4. By address only
+        InetAddress ipOnly = InetAddress.getByAddress(ip);
+        System.out.println("4. IP Only: " + ipOnly);
+
+        // 5. All IPs
+        InetAddress[] all = InetAddress.getAllByName("www.google.com");
+        System.out.println("5. All Google IPs:");
+        for (InetAddress addr : all)
+            System.out.println("   " + addr);
+    }
+}

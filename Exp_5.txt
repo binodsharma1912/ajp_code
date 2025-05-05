@@ -1,0 +1,94 @@
+Interface
+package com.rmi;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+public interface PrintI extends Remote{
+	public void show() throws RemoteException;
+}
+
+CLASS
+package com.rmi;
+
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.*;
+
+@SuppressWarnings("serial")
+public class PrintC extends UnicastRemoteObject implements PrintI{
+
+	protected PrintC() throws RemoteException {
+		super();
+	}
+
+	public void show(){
+		// TODO Auto-generated method stub
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter String");
+		String str=sc.nextLine();
+		String rev=new StringBuilder(str).reverse().toString();
+		if(str.equals(rev))
+		{
+			System.out.println("String is palnindrome");
+		}
+		else
+		{
+			System.out.println("String is not palnindrome");
+		}
+	}
+
+}
+
+
+SERVER
+package com.rmi;
+
+import java.nio.channels.AlreadyBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+
+public class Server {
+
+	public static void main(String[] args) throws RemoteException, AlreadyBoundException {
+		// TODO Auto-generated method stub
+		
+		PrintC obj=new PrintC();
+		Registry registry=LocateRegistry.createRegistry(5000);
+		try 
+		{
+			registry.bind("DISPLAY", obj);
+		}
+		catch (java.rmi.AlreadyBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}	
+}
+CLIENT
+package com.rmi;
+
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+
+public class Client {
+
+	public static void main(String[] args) throws RemoteException, MalformedURLException{
+		// TODO Auto-generated method stub
+		
+		try 
+		{
+			PrintI obj1=(PrintI) Naming.lookup("rmi://localhost:5000/DISPLAY");
+			obj1.show();
+		}
+		catch(NotBoundException e)
+		{
+			e.printStackTrace();
+		}
+
+	}
+
+}
+
+

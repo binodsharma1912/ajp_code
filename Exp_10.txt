@@ -1,0 +1,77 @@
+Index.html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Calculator</title>
+</head>
+<body>
+	<div>
+		<form action="CalculatorServlet" method="post">
+			<input type="number" name="num1" placeholder="Enter First number" /><br><br>
+			<input type="number" name="num2" placeholder="Enter Second number" /><br><br>
+			Operation
+			<select name="operation">
+				<option value="add">Add</option>
+				<option value="sub">Subtraction</option>
+				<option value="mul">Multiplication</option>
+				<option value="divide">Division</option>
+			</select><br><br>
+			<input type="submit" value="Calculate" />
+		</form>
+	</div>
+</body>
+</html>
+
+Web.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>Calculator_Practice</display-name>
+    <servlet>
+    	<servlet-name>CalculatorServlet</servlet-name>
+    	<servlet-class>com.pkg.CalculatorServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+    	<servlet-name>CalculatorServlet</servlet-name>
+    	<url-pattern>/CalculatorServlet</url-pattern>
+    </servlet-mapping>
+</web-app>
+
+CalculatorServlet.java
+package com.pkg;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@SuppressWarnings("serial")
+public class CalculatorServlet extends HttpServlet {
+	
+	protected void doPost(HttpServletResponse res, HttpServletRequest req) throws ServletException, IOException
+	{
+		double num1=Double.parseDouble(req.getParameter("num1"));
+		double num2=Double.parseDouble(req.getParameter("num2"));
+		String operation=req.getParameter("operation");
+		double result=0;
+		switch(operation)
+		{
+		case "add": result=num1+num2;
+					break;
+		case "sub": result=num1-num2;
+					break;
+		case "mul": result=num1*num2;
+					break;
+		case "divide": result=num1/num2;
+					break;
+		}
+		res.setContentType("text/html");
+		PrintWriter out=res.getWriter();
+		out.println("<h2> Result: "+result);
+	}
+
+}
+

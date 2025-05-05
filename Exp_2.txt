@@ -1,0 +1,86 @@
+
+import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+public class Demo extends WindowAdapter implements MouseListener{
+	Frame f;
+	TextField ta;
+	Label l1,l2;
+	public Demo()
+	{
+		f=new Frame();
+		f.setSize(500, 500);
+		f.setTitle("Key Event");
+		f.setLayout(null);
+		f.setVisible(true);
+		init();
+		add_component();
+		f.addWindowListener(this);
+		ta.addMouseListener(this);
+	}
+	void init()
+	{
+		ta=new TextField();
+		l1=new Label();
+		l2=new Label();
+	}
+	void add_component()
+	{
+		l1.setBounds(150, 30, 120, 40);
+		ta.setBounds(150,100,70,80);
+		l2.setBounds(150, 200, 120, 100);
+		l1.setText("mouse event handling");
+		f.add(l1);
+		f.add(ta);
+		f.add(l2);
+	}
+	public void windowClosing(WindowEvent e)
+	{
+		f.dispose();
+	}
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		l2.setText("Mouse Clicked");
+		ta.setBackground(Color.black);
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		l2.setText("Mouse Pressed");
+		ta.setBackground(Color.red);
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		l2.setText("Mouse Released");
+		ta.setBackground(Color.BLUE);
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		l2.setText("Mouse Entered");
+		ta.setBackground(Color.darkGray);
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		l2.setText("Mouse Exited");
+		ta.setBackground(Color.yellow);
+		
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Demo obj=new Demo();
+	}
+}
+

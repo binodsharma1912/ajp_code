@@ -1,0 +1,68 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Prime Number Checker</title>
+</head>
+<style>
+	body
+	{
+		background-color: #c1fff9;
+		display:flex;
+		justify-content:center;
+		align-item:center;
+		height: 50vh;
+	}
+	.container
+	{
+		background-color:yellow;
+		display:flex;
+		flex-direction:column;
+		justify-content:center;
+		align-item:center;
+		height: 30vh;
+		width: 40vh;
+		text-align:center;
+		border-radius:10px;
+		
+		
+	}
+</style>
+<body>
+    <div class="container">
+    	<h2>Prime no Checker</h2>
+        <form method="get">
+            <input type="number" name="num" placeholder="Enter the number" />
+            <br/>
+            <br/>
+     
+            <input type="submit" value="Check" />
+        </form>
+
+        <%
+            String input = request.getParameter("num");
+            if (input != null) {
+                int num = Integer.parseInt(input);
+                boolean isPrime = true;
+
+                if (num <= 1) {
+                    isPrime = false;
+                } else {
+                    for (int i = 2; i < num; i++) {
+                        if (num % i == 0) {
+                            isPrime = false;
+                            break;
+                        }
+                    }
+                }
+        %>
+            <% if (isPrime) { %>
+                <h3><%= num %> is a Prime number.</h3>
+            <% } else { %>
+                <h3><%= num %> is not a Prime number.</h3>
+            <% } %>
+        <% } %>
+    </div>
+</body>
+</html>

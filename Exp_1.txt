@@ -1,0 +1,70 @@
+
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+public class Demo extends WindowAdapter implements KeyListener{
+	Frame f;
+	TextField ta;
+	Label l1,l2;
+	public Demo()
+	{
+		f=new Frame();
+		f.setSize(500, 500);
+		f.setTitle("Key Event");
+		f.setLayout(null);
+		f.setVisible(true);
+		init();
+		add_component();
+		f.addWindowListener(this);
+		ta.addKeyListener(this);
+	}
+	void init()
+	{
+		ta=new TextField();
+		l1=new Label();
+		l2=new Label();
+	}
+	void add_component()
+	{
+		l1.setBounds(150, 30, 100, 40);
+		ta.setBounds(150,100,70,80);
+		l2.setBounds(150, 200, 120, 100);
+		l1.setText("key event handling");
+		
+		f.add(l1);
+		f.add(ta);
+		f.add(l2);
+	}
+	
+	public void windowClosing(WindowEvent e)
+	{
+		f.dispose();
+	}
+	
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		l2.setText("Key Typed: "+ e.getKeyChar());
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		l2.setText("Key Pressed: "+ e.getKeyChar());
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		l2.setText("Key Released: "+ e.getKeyChar());
+		
+	}
+	public static void main(String[] args)  {
+		// TODO Auto-generated method stub
+		Demo obj=new Demo();
+	}
+
+}

@@ -1,0 +1,118 @@
+package pkg1;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import javax.swing.*;
+
+public class Exp3 extends WindowAdapter implements ActionListener {
+	
+	JFrame f;
+	JLabel namel,s1l,s2l,s3l;
+	JTextField name,s1,s2,s3;
+	JButton result;
+	Exp3()
+	{
+		f=new JFrame("Student Marks");
+		f.setSize(500,500);
+		f.setLayout(null);
+		f.setVisible(true);
+		f.addWindowListener(this);
+		init();
+		add_components();
+	}
+	public void init()
+	{
+		namel=new JLabel("Name: ");
+		s1l=new JLabel("Subject 1: ");
+		s2l=new JLabel("Subject 2: ");
+		s3l=new JLabel("Subject 3: ");
+		
+		
+		name=new JTextField();
+		s1=new JTextField();
+		s2=new JTextField();
+		s3=new JTextField();
+		
+		
+		result=new JButton("Check Result");
+		result.addActionListener(this);
+		
+	}
+	public void add_components()
+	{
+		namel.setBounds(50, 30, 100, 20);
+		f.add(namel);
+		s1l.setBounds(50, 70, 100, 20);
+		f.add(s1l);
+		s2l.setBounds(50, 110, 100, 20);
+		f.add(s2l);
+		s3l.setBounds(50, 150, 100, 20);
+		f.add(s3l);
+		
+		name.setBounds(200, 30, 100, 20);
+		f.add(name);
+		
+		s1.setBounds(200, 70, 100, 20);
+		f.add(s1);
+		
+		s2.setBounds(200, 110, 100, 20);
+		f.add(s2);
+		
+		s3.setBounds(200, 150, 100, 20);
+		f.add(s3);
+		
+		result.setBounds(150, 250,150, 20);
+		f.add(result);
+	}
+	
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		String n=name.getText();
+		int m1=Integer.parseInt(s1.getText());
+		int m2=Integer.parseInt(s2.getText());
+		int m3=Integer.parseInt(s3.getText());
+		
+		double total=m1+m2+m3;
+		double avg=(total/300.0)*100.0;
+		String resul=avg>=35 ? "Pass":"Fail";
+		ResultWindow(n,total,avg,resul);
+		
+	}
+	public void ResultWindow(String name, double sum, double pr, String res)
+	{
+		JFrame rf=new JFrame("Marksheet");
+		rf.setSize(500, 500);
+		rf.setLayout(null);
+		rf.setVisible(true);
+		
+		JLabel nameLabel=new JLabel("Name: "+name);
+		nameLabel.setBounds(50, 30, 200, 30);
+		rf.add(nameLabel);
+		
+		JLabel totalLabel=new JLabel("Total: "+sum);
+		totalLabel.setBounds(50, 70, 200, 30);
+		rf.add(totalLabel);
+		
+		JLabel prcLabel=new JLabel("Percentage: "+pr+"%");
+		prcLabel.setBounds(50, 110, 200, 30);
+		rf.add(prcLabel);
+		
+		JLabel resultLabel=new JLabel("Result: "+res);
+		resultLabel.setBounds(50, 150, 200, 30);
+		rf.add(resultLabel);
+		
+		
+		
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Exp3 obj=new Exp3();
+	}
+
+}
+
